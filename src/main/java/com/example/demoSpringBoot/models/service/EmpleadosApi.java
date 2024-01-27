@@ -33,12 +33,12 @@ public class EmpleadosApi {
 
     public TipoObject empleado(int num){
         WebClient client = WebClient.create();
+
         String responseJson = client.get()
                 .uri(urlEmpleado+num)
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
-
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.readValue(responseJson, TipoObject.class);
