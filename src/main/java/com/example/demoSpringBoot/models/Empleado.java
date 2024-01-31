@@ -2,7 +2,7 @@ package com.example.demoSpringBoot.models.domain;
 
 public class Empleado {
 
-    private String id;
+    private int id;
 
     private String employee_name;
 
@@ -12,11 +12,11 @@ public class Empleado {
 
     private String profile_image;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
