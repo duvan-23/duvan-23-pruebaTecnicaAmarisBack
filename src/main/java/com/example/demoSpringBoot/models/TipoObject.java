@@ -1,4 +1,4 @@
-package com.example.demoSpringBoot.models.domain;
+package com.example.demoSpringBoot.models;
 
 public class TipoObject extends Estructura{
     private Empleado data;

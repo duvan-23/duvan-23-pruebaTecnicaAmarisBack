@@ -1,7 +1,11 @@
 package com.example.demoSpringBoot.controllers;
 
-import com.example.demoSpringBoot.models.domain.*;
-import com.example.demoSpringBoot.models.service.EmpleadosApi;
+import com.example.demoSpringBoot.models.Empleado;
+import com.example.demoSpringBoot.models.EmpleadoModificado;
+import com.example.demoSpringBoot.models.TipoList;
+import com.example.demoSpringBoot.models.TipoObject;
+import com.example.demoSpringBoot.service.EmpleadosApi;
+import com.example.demoSpringBoot.util.ModificarEmpleado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,40 +21,26 @@ public class IndexController {
     private EmpleadosApi servicio ;
 
     @GetMapping("/")
-    public List<EmpleadoModificado> index(){
+    public List<EmpleadoModificado> empleados(){
         TipoList response = servicio.empleados();
         List<EmpleadoModificado> modifiedEmployeeList = new ArrayList<>();
         if (response != null) {
-            List<Empleado> employeeList = response.getData();
-
-            for (Empleado employeeData : employeeList) {
-                EmpleadoModificado modifiedEmployee = new EmpleadoModificado();
-                modifiedEmployee.setId(employeeData.getId());
-                modifiedEmployee.setEmployee_name(employeeData.getEmployee_name());
-                modifiedEmployee.setEmployee_salary(employeeData.getEmployee_salary());
-                modifiedEmployee.setEmployee_age(employeeData.getEmployee_age());
-                modifiedEmployee.setProfile_image(employeeData.getProfile_image());
-                modifiedEmployee.setEmployee_anual_salary(employeeData.getEmployee_salary());
-                modifiedEmployeeList.add(modifiedEmployee);
-            }
+            ModificarEmpleado helper = new ModificarEmpleado();
+            modifiedEmployeeList = helper.modificar(response.getData());
         }
         return modifiedEmployeeList;
     }
     @GetMapping("/{num}")
-    public List<EmpleadoModificado> index2(@PathVariable Integer num){
+    public List<EmpleadoModificado> empleado(@PathVariable Integer num){
         TipoObject response = servicio.empleado(num);
         List<EmpleadoModificado> modifiedEmployeeList = new ArrayList<>();
         if (response != null) {
             Empleado employee = response.getData();
             if(employee!= null) {
-                EmpleadoModificado modifiedEmployee = new EmpleadoModificado();
-                modifiedEmployee.setId(employee.getId());
-                modifiedEmployee.setEmployee_name(employee.getEmployee_name());
-                modifiedEmployee.setEmployee_salary(employee.getEmployee_salary());
-                modifiedEmployee.setEmployee_age(employee.getEmployee_age());
-                modifiedEmployee.setProfile_image(employee.getProfile_image());
-                modifiedEmployee.setEmployee_anual_salary(employee.getEmployee_salary());
-                modifiedEmployeeList.add(modifiedEmployee);
+                List<Empleado> ma = new ArrayList<>();
+                ma.add(employee);
+                ModificarEmpleado helper = new ModificarEmpleado();
+                modifiedEmployeeList = helper.modificar(ma);
             }
         }
         return modifiedEmployeeList;

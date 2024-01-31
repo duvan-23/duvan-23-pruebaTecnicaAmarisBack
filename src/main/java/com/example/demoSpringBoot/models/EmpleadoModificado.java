@@ -1,4 +1,4 @@
-package com.example.demoSpringBoot.models.domain;
+package com.example.demoSpringBoot.models;
 
 public class EmpleadoModificado extends Empleado{
 
@@ -9,6 +9,6 @@ public class EmpleadoModificado extends Empleado{
     }
 
     public void setEmployee_anual_salary(int employee_anual_salary) {
-        this.employee_anual_salary = employee_anual_salary * 12;
+        this.employee_anual_salary = Math.abs(employee_anual_salary) * 12;
     }
 }
