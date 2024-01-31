@@ -32,9 +32,9 @@ public class ServiceTest {
             TipoObject response = objectMapper.readValue(responseJson, TipoObject.class);
             Empleado employee = response.getData();
 
-            Assertions.assertEquals(employee.getEmployee_name(), "Tiger Nixon","Correcta decodificación de datos ");
-            Assertions.assertEquals(employee.getEmployee_salary(), 320800,"Correcta decodificación de datos ");
-            Assertions.assertEquals(employee.getEmployee_age(), 61,"Correcta decodificación de datos ");
+            Assertions.assertEquals("Tiger Nixon",employee.getEmployee_name(),"Correcta decodificación de datos ");
+            Assertions.assertEquals(320800,employee.getEmployee_salary(),"Correcta decodificación de datos ");
+            Assertions.assertEquals(61,employee.getEmployee_age(),"Correcta decodificación de datos ");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -50,7 +50,7 @@ public class ServiceTest {
         HttpStatusCode response = responseService.block();
         String statusCode = response.toString();
 
-        Assertions.assertEquals(statusCode, "200 OK", "Response url dummy service 200");
+        Assertions.assertEquals("200 OK",statusCode, "Response url dummy service 200");
 
     }
 }
